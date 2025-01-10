@@ -1,8 +1,9 @@
 "use client"
+import { VideoFrameContext } from '@/app/_context/VideoFramesContext';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 const defaultFrame={
     image:'/footage.png',
@@ -15,6 +16,7 @@ const defaultFrame={
 function TrackList() {
     const [frameList,setFrameList]=useState([defaultFrame]);
     const [selectedFrame,setSelectedFrame]=useState(0);
+    const {videoFrames,setVideoFrames}=useContext(VideoFrameContext)
     const addNewFrame=()=>{
         setFrameList(prev=>[...prev,defaultFrame]);
     }
@@ -23,6 +25,20 @@ function TrackList() {
         const updatedFrameList=frameList?.filter((_,index)=>index!==indexToRemove);
         setFrameList(updatedFrameList);
     }
+
+    useEffect(()=>{
+        let totalDuration=0;
+        frameList.forEach(frame=>{
+            totalDuration=totalDuration+frame.duration;
+        })
+
+        frameList&& setVideoFrames({
+            totalDuration:totalDuration,
+            frameList:frameList,
+            selectedFrame:selectedFrame
+        })
+
+    },[frameList,selectedFrame])
 
   return (
     <div className='p-5 bg-gray-100 rounded-lg'>

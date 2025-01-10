@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../dashboard/_components/Header'
 import { Button } from '@/components/ui/button'
 import TrackList from './_components/TrackList'
+import RemotionPlayer from './_components/RemotionPlayer'
 
 function Editor() {
   return (
@@ -17,7 +18,7 @@ function Editor() {
                     <TrackList/>
                 </div>
                 <div className='col-span-3'>
-                    Video Player
+                    <RemotionPlayer/>
                 </div>
                 <div className='col-span-2'>
                     Control Section
