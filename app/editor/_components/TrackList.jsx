@@ -28,7 +28,7 @@ function TrackList() {
 
     useEffect(()=>{
         let totalDuration=0;
-        frameList.forEach(frame=>{
+        frameList?.forEach(frame=>{
             totalDuration=totalDuration+frame.duration;
         })
 
@@ -40,10 +40,16 @@ function TrackList() {
 
     },[frameList,selectedFrame])
 
+    useEffect(()=>{
+        if (videoFrames && videoFrames?.frameList !== frameList) {
+            setFrameList(videoFrames?.frameList);
+        }
+    },[videoFrames])
+
   return (
     <div className='p-5 bg-gray-100 rounded-lg'>
         <div className='h-[75vh] overflow-scroll scrollbar-hide'>
-            {frameList.map((frame,index)=>(
+            {frameList?.map((frame,index)=>(
                 <div key={index} className={`flex flex-col items-center border-b p-2 mt-3 rounded-lg cursor-pointer ${selectedFrame==index&&'bg-white'}`} onClick={()=>setSelectedFrame(index)}>
                     <Image src={frame.image} alt={index} width={40} height={40} className='w-full h-[40px] object-contain rounded-lg'/>
                     <h2 className='text-xs line-clamp-2 mt-1'>{frame.text}</h2>
