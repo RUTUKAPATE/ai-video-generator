@@ -4,6 +4,7 @@ import Header from '@/app/dashboard/_components/Header'
 import TrackList from '../_components/TrackList'
 import RemotionPlayer from '../_components/RemotionPlayer'
 import SaveVideo from '../_components/SaveVideo'
+import FrameConfig from '../_components/FrameConfig'
 
 
 function Editor() {
@@ -26,7 +27,7 @@ function Editor() {
                     <RemotionPlayer/>
                 </div>
                 <div className='col-span-2'>
-                    Control Section
+                    <FrameConfig/>
                 </div>
             </div>
         </div>

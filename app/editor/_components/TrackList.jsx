@@ -11,12 +11,16 @@ const defaultFrame={
     textColor:'black',
     fontSize:20,
     duration:2,
+    fontFamily:'Bungee',
+    bgColor:'#ffffff',
+    animation:'zoomIn'
 }
 
 function TrackList() {
     const [frameList,setFrameList]=useState([defaultFrame]);
     const [selectedFrame,setSelectedFrame]=useState(0);
     const {videoFrames,setVideoFrames}=useContext(VideoFrameContext)
+
     const addNewFrame=()=>{
         setFrameList(prev=>[...prev,defaultFrame]);
     }
@@ -28,21 +32,25 @@ function TrackList() {
 
     useEffect(()=>{
         let totalDuration=0;
-        frameList?.forEach(frame=>{
-            totalDuration=totalDuration+frame.duration;
-        })
+        if(frameList)
+        {
+            frameList?.forEach(frame=>{
+                totalDuration=totalDuration+frame.duration;
+            })
 
-        frameList&& setVideoFrames({
-            totalDuration:totalDuration,
-            frameList:frameList,
-            selectedFrame:selectedFrame
-        })
+            frameList&& setVideoFrames({
+                totalDuration:totalDuration,
+                frameList:frameList,
+                selectedFrame:selectedFrame
+            })
+        }
+        
 
     },[frameList,selectedFrame])
 
     useEffect(()=>{
         if (videoFrames && videoFrames?.frameList !== frameList) {
-            setFrameList(videoFrames?.frameList);
+            setFrameList(videoFrames.frameList);
         }
     },[videoFrames])
 
