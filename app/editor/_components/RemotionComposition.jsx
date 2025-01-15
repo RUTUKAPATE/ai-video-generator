@@ -1,13 +1,15 @@
-import React from 'react'
-import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig } from 'remotion'
+import React, { useContext } from 'react'
+import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig } from 'remotion'
 import * as Bungee from '@remotion/google-fonts/Bungee'
 import * as Anton from '@remotion/google-fonts/Anton'
 import * as Parisienne from '@remotion/google-fonts/Parisienne'
 import * as Pacifico from '@remotion/google-fonts/Pacifico'
 import { TextAnimation } from '@/app/_data/Animations'
+import { VideoFrameContext } from '@/app/_context/VideoFramesContext'
 
 
 function RemotionComposition({frameList}) {
+  const { videoFrames, setVideoFrames } = useContext(VideoFrameContext) 
   let trackFrame=0;
   const {width,height,fps}=useVideoConfig();
   const currentFrame=useCurrentFrame();
@@ -24,12 +26,19 @@ function RemotionComposition({frameList}) {
             trackFrame=trackFrame+frame.duration*30;
             const duration=frame.duration*30
           return(
-            <Sequence key={index} from={fromFrame} durationInFrames={duration}>
+            <Sequence key={index} from={fromFrame} durationInFrames={duration} style={{
+              background:frame.bgColor,
+            }}>
+
+                <AbsoluteFill>
+                  {frame?.sticker&& <img src={frame?.sticker} alt={'emoji'} width={50} height={50} style={{
+                    transform: `scale(${frame?.stickerSize}) translateX(${frame?.stickerPositionX}px) translateY(${frame?.stickerPositionY}px)`,
+                  }}/>}
+                </AbsoluteFill>
                 <AbsoluteFill style={{
                   display:'flex',
                   justifyContent:'center',
                   alignItems:'center',
-                  background:frame.bgColor,
                   fontFamily:frame?.fontFamily
                   // transform:`translateX(${width/2-30}px) translateY(${height/2-30}px)`
                 }}>
@@ -40,9 +49,12 @@ function RemotionComposition({frameList}) {
 
                   }}>{frame.text}</h2>
                 </AbsoluteFill>
+
             </Sequence>
           )
         })}
+
+        <Audio volume={0.5} src={staticFile(videoFrames?.music || "default-audio.mp3")} />
     </AbsoluteFill>
   ) 
 }

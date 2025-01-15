@@ -69,3 +69,17 @@ export const FontList = [
     }
   ]
   
+  export const MusicList = [
+    {
+      // name:'Funky Drum',
+      name: 'audio1.mp3'
+    },
+    {
+      // name:'Exicited Clap',
+      name: 'audio2.mp3'
+    },
+    {
+      // name:'Intro Music',
+      name: 'audio3.mp3'
+    }
+  ]

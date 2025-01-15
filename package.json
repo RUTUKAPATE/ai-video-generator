@@ -20,6 +20,7 @@
     "@radix-ui/react-slider": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.2",
+    "@remotion/animated-emoji": "4.0.246",
     "@remotion/cli": "4.0.246",
     "@remotion/google-fonts": "^4.0.246",
     "axios": "^1.7.9",
