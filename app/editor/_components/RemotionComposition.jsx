@@ -25,6 +25,10 @@ function RemotionComposition({frameList}) {
             const fromFrame=index==0?0:trackFrame;
             trackFrame=trackFrame+frame.duration*30;
             const duration=frame.duration*30
+            if(isNaN(fromFrame))
+            {
+              fromFrame=0;
+            }
           return(
             <Sequence key={index} from={fromFrame} durationInFrames={duration} style={{
               background:frame.bgColor,
@@ -32,7 +36,7 @@ function RemotionComposition({frameList}) {
 
                 <AbsoluteFill>
                   {frame?.sticker&& <img src={frame?.sticker} alt={'emoji'} width={50} height={50} style={{
-                    transform: `scale(${frame?.stickerSize}) translateX(${frame?.stickerPositionX}px) translateY(${frame?.stickerPositionY}px)`,
+                    transform: `scale(${frame?.stickerSize}) translateX(${frame?.stickerPositionX??50}px) translateY(${frame?.stickerPositionY??50}px)`,
                   }}/>}
                 </AbsoluteFill>
                 <AbsoluteFill style={{

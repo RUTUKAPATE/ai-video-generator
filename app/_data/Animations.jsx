@@ -177,9 +177,9 @@ export const SlideUp = (frame, fps, fromFrame, height) => {
   
 
 export const TextAnimation = (type, frame=30, fps, fromFrame=0,width,height) => {
-//   if (isNaN(frame) || isNaN(fromFrame)) {
-//     return 0; // Default value or early return
-// }
+  if (isNaN(frame) || isNaN(fromFrame)) {
+    return 0; // Default value or early return
+}
    
     if (type == 'zoomIn') {
         return ZoomIn(frame, fps, fromFrame);
